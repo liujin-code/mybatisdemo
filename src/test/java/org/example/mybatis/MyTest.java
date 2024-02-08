@@ -1,5 +1,7 @@
 package org.example.mybatis;
 
+import com.alibaba.fastjson.JSON;
+import org.example.mybatis.PO.User;
 import org.example.mybatis.dao.IUserDao;
 import org.example.mybatis.io.Resources;
 import org.example.mybatis.session.SqlSession;
@@ -23,8 +25,8 @@ public class MyTest {
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
 
         // 3. 测试验证
-        String res = userDao.queryUserInfoById("10001");
-        System.out.println(res);
+        User res = userDao.queryUserInfoById("1");
+        System.out.println(JSON.toJSONString(res));
     }
 
 

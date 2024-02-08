@@ -1,5 +1,7 @@
 package org.example.mybatis.dao;
 
+import org.example.mybatis.PO.User;
+
 public interface IUserDao {
-    String queryUserInfoById(String uId);
+    User queryUserInfoById(String uId);
 }
