@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="init">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mybatis/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mybatis/MyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mybatis/dao/IUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mybatis/dao/IUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/mybatis-config-datasource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/mybatis-config-datasource.xml" afterDir="false" />
-    </list>
+    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="modify" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +174,19 @@
       <workItem from="1707100715846" duration="596000" />
       <workItem from="1707126049631" duration="2456000" />
       <workItem from="1707268144809" duration="1802000" />
-      <workItem from="1707288916084" duration="591000" />
+      <workItem from="1707288916084" duration="10128000" />
+      <workItem from="1708218931727" duration="1316000" />
+      <workItem from="1708305935223" duration="588000" />
+      <workItem from="1708311935133" duration="591000" />
+      <workItem from="1708328519106" duration="596000" />
+      <workItem from="1708391571053" duration="596000" />
+      <workItem from="1708402455345" duration="1188000" />
+      <workItem from="1708419129193" duration="598000" />
+      <workItem from="1708435067326" duration="2432000" />
+      <workItem from="1708526353130" duration="599000" />
+      <workItem from="1708574600703" duration="2000" />
+      <workItem from="1710465522066" duration="434000" />
+      <workItem from="1710466027912" duration="595000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -199,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706343710953</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="modify">
+      <option name="closed" value="true" />
+      <created>1707358709508</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707358709508</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +231,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="modify" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
