@@ -1,7 +1,10 @@
 package org.example.mybatis.datasource.pooled;
 
+import lombok.SneakyThrows;
 import org.example.mybatis.datasource.unpooled.UnpooledDataSource;
+
 import java.util.logging.Logger;
+
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
@@ -14,7 +17,7 @@ public class PooledDataSource implements DataSource {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(PooledDataSource.class);
 
     //池状态
-    private PoolState poolState = new PoolState(this);
+    private PoolState state = new PoolState(this);
 
     private final UnpooledDataSource dataSource;
     //活跃连接数
@@ -32,17 +35,21 @@ public class PooledDataSource implements DataSource {
     // 用来配置 poolPingQuery 多次时间被用一次
     protected int poolPingConnectionsNotUsedFor = 0;
     private int expectedConnectionTypeCode;
+
     public PooledDataSource() {
         dataSource = new UnpooledDataSource();
     }
+
+    @SneakyThrows
     @Override
-    public Connection getConnection() throws SQLException {
-        return null;
+    public Connection getConnection() {
+        return popConnection(dataSource.getUsername(), dataSource.getPassword()).getProxyConnection();
     }
 
+    @SneakyThrows
     @Override
-    public Connection getConnection(String username, String password) throws SQLException {
-        return null;
+    public Connection getConnection(String username, String password) {
+        return popConnection(username, password).getProxyConnection();
     }
 
     @Override
@@ -78,5 +85,145 @@ public class PooledDataSource implements DataSource {
     @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return null;
+    }
+
+    public void setDriver(String driver) {
+        dataSource.setDriver(driver);
+        forceCloseAll();
+    }
+
+    public void setUrl(String url) {
+        dataSource.setUrl(url);
+        forceCloseAll();
+    }
+
+    public void setUsername(String username) {
+        dataSource.setUsername(username);
+        forceCloseAll();
+    }
+
+    public void setPassword(String password) {
+        dataSource.setPassword(password);
+        forceCloseAll();
+    }
+
+    public int assembleConnectionTypeCode(String url, String username, String password) {
+        return ("" + url + username + password).hashCode();
+    }
+
+    public void setDefaultAutoCommit(boolean defaultAutoCommit) {
+        dataSource.setAutoCommit(defaultAutoCommit);
+        forceCloseAll();
+    }
+
+    private void forceCloseAll() {
+    }
+
+    private PooledConnection popConnection(String username, String password) throws SQLException, InterruptedException {
+        boolean countWait = false;
+        long startTime = System.currentTimeMillis();
+        int localBadConnectionCount = 0;
+        PooledConnection conn = null;
+        while (conn == null) {
+            synchronized (state) {
+                if (!state.idleConnections.isEmpty()) {
+                    conn = state.idleConnections.remove(0);
+                    logger.info("Checked out connection " + conn.getRealHashCode() + " from pool.");
+                } else {
+                    if (state.activeConnections.size() < poolMaximumActiveConnections) {
+                        conn = new PooledConnection(dataSource.getConnection(), this);
+                        logger.info("Created connection " + conn.getRealHashCode() + ".");
+                    } else {
+                        PooledConnection oldestConnection = state.activeConnections.get(0);
+                        long oldestConnectionCheckoutTimestamp = oldestConnection.getCheckoutTimestamp();
+                        if (oldestConnectionCheckoutTimestamp > poolMaximumCheckoutTime) {
+                            state.claimedOverdueConnectionCount++;
+                            state.accumulatedCheckoutTimeOfOverdueConnections += oldestConnectionCheckoutTimestamp;
+                            state.accumulatedCheckoutTime += oldestConnectionCheckoutTimestamp;
+                            state.activeConnections.remove(oldestConnection);
+                            if (!oldestConnection.getRealConnection().getAutoCommit()) {
+                                oldestConnection.getRealConnection().rollback();
+                            }
+                            conn = new PooledConnection(dataSource.getConnection(), this);
+                            oldestConnection.invalid();
+                            logger.info("Claimed overdue connection " + conn.getRealHashCode() + ".");
+                        } else {
+                            try {
+                                if (!countWait) {
+                                    state.hadToWaitCount++;
+                                    countWait = true;
+                                }
+                                logger.info("Waiting as long as " + poolTimeToWait + " milliseconds for connection.");
+                                long wt = System.currentTimeMillis();
+                                state.wait(poolTimeToWait);
+                                state.accumulatedWaitTime += System.currentTimeMillis() - wt;
+                            } catch (InterruptedException e) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (conn != null) {
+                    if (conn.isValid()) {
+                        if (!conn.getRealConnection().getAutoCommit()) {
+                            conn.getRealConnection().commit();
+                        }
+                        conn.setConnectionTypeCode(assembleConnectionTypeCode(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword()));
+                        // 记录checkout时间
+                        conn.setCheckoutTimestamp(System.currentTimeMillis());
+                        conn.setLastUsedTimestamp(System.currentTimeMillis());
+                        state.activeConnections.add(conn);
+                        state.requestCount++;
+                        state.accumulatedRequestTime += System.currentTimeMillis() - startTime;
+                    } else {
+                        logger.info("A bad connection (" + conn.getRealHashCode() + ") was returned from the pool, getting another connection");
+                        // 如果没拿到，统计信息：失败链接 +1
+                        state.badConnectionCount++;
+                        localBadConnectionCount++;
+                        conn = null;
+                        // 失败次数较多，抛异常
+                        if (localBadConnectionCount > (poolMaximumIdleConnections + 3)) {
+                            logger.debug("PooledDataSource: Could not get a good connection to the database.");
+                            throw new SQLException("PooledDataSource: Could not get a good connection to the database.");
+                        }
+                    }
+                }
+            }
+        }
+        return conn;
+    }
+
+
+    public void pushConnection(PooledConnection pooledConnection) throws SQLException {
+        synchronized (state) {
+            state.activeConnections.remove(pooledConnection);
+            if (pooledConnection.isValid()) {
+                if (state.idleConnections.size() < poolMaximumIdleConnections && pooledConnection.getConnectionTypeCode() == expectedConnectionTypeCode) {
+                    state.accumulatedCheckoutTime += pooledConnection.getCheckoutTimestamp();
+                    if (!pooledConnection.getRealConnection().getAutoCommit()) {
+                        pooledConnection.getRealConnection().rollback();
+                    }
+                    PooledConnection newConnections = new PooledConnection(pooledConnection.getRealConnection(), this);
+                    state.idleConnections.add(newConnections);
+                    newConnections.setCreatedTimestamp(pooledConnection.getCreatedTimestamp());
+                    newConnections.setLastUsedTimestamp(pooledConnection.getLastUsedTimestamp());
+                    pooledConnection.invalid();
+                    logger.info("Returned connection " + newConnections.getRealHashCode() + " to pool.");
+                    state.notifyAll();
+                } else {
+                    state.accumulatedCheckoutTime += pooledConnection.getCheckoutTimestamp();
+                    if (!pooledConnection.getRealConnection().getAutoCommit()) {
+                        pooledConnection.getRealConnection().rollback();
+                    }
+                    pooledConnection.getRealConnection().close();
+                    logger.info("Closed connection " + pooledConnection.getRealHashCode() + ".");
+                    pooledConnection.invalid();
+                }
+            } else {
+                logger.info("A bad connection (" + pooledConnection.getRealHashCode() + ") attempted to return to the pool, discarding connection.");
+                state.badConnectionCount++;
+            }
+
+        }
     }
 }

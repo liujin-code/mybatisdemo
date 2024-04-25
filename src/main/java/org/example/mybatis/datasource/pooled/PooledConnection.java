@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 @Data
 public class PooledConnection implements InvocationHandler {
@@ -35,13 +36,30 @@ public class PooledConnection implements InvocationHandler {
         this.proxyConnection = (Connection) Proxy.newProxyInstance(Connection.class.getClassLoader(), IFACES, this);
     }
 
+    public void invalid(){
+        valid = false;
+    }
+    public int getRealHashCode() {
+        return realConnection == null ? 0 : realConnection.hashCode();
+    }
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String methodName = method.getName();
         if (CLOSE.hashCode() == methodName.hashCode() && CLOSE.equals(methodName)) {
+            dataSource.pushConnection(this);
+            return null;
         } else {
-
+            if (!Object.class.equals(method.getDeclaringClass())) {
+                checkConnection();
+            }
+            return method.invoke(realConnection, args);
         }
-        return null;
+    }
+
+    private void checkConnection() throws SQLException {
+        if (!valid) {
+            throw new SQLException("Error accessing PooledConnection. Connection is invalid.");
+        }
     }
 }
