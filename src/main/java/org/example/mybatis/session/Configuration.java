@@ -1,11 +1,19 @@
 package org.example.mybatis.session;
 
+import org.example.mybatis.Executor.Executor;
+import org.example.mybatis.Executor.SimpleExecutor;
+import org.example.mybatis.Executor.resultset.DefaultResultSetHandler;
+import org.example.mybatis.Executor.resultset.ResultSetHandler;
+import org.example.mybatis.Executor.statement.PrepareStatementHandler;
+import org.example.mybatis.Executor.statement.StatementHandler;
 import org.example.mybatis.binding.MapperRegistry;
 import org.example.mybatis.datasource.druid.DruidDataSourceFactory;
 import org.example.mybatis.datasource.pooled.PooledDataSourceFactory;
 import org.example.mybatis.datasource.unpooled.UnpooledDataSourceFactory;
+import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.Environment;
 import org.example.mybatis.mapping.MappedStatement;
+import org.example.mybatis.transaction.Transaction;
 import org.example.mybatis.transaction.jdbc.JdbcTransactionFactory;
 import org.example.mybatis.type.TypeAliasRegistry;
 
@@ -61,5 +69,16 @@ public class Configuration {
 
     public TypeAliasRegistry getTypeAliasRegistry() {
         return typeAliasRegistry;
+    }
+
+    public StatementHandler newStateMentHandler(SimpleExecutor simpleExecutor, MappedStatement ms, Object parameter, ResultSetHandler resultSetHandler, BoundSql boundSql) {
+        return new PrepareStatementHandler(simpleExecutor, ms, parameter, resultSetHandler, boundSql);
+    }
+
+    public Executor newExecutor(Transaction transaction){
+        return new SimpleExecutor(this, transaction);
+    }
+    public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, BoundSql boundSql) {
+        return new DefaultResultSetHandler(executor,mappedStatement,boundSql);
     }
 }

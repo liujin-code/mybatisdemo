@@ -1,41 +1,34 @@
 package org.example.mybatis.session.defaults;
 
-import org.example.mybatis.mapping.BoundSql;
-import org.example.mybatis.mapping.Environment;
+import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
 import org.example.mybatis.session.SqlSession;
 
 import java.lang.reflect.Method;
-import java.sql.*;
-import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DefaultSqlSession implements SqlSession {
 
     private final Configuration configuration;
 
-    public DefaultSqlSession(Configuration configuration) {
+    private final Executor executor;
+
+    public DefaultSqlSession(Configuration configuration, Executor executor) {
         this.configuration = configuration;
+        this.executor = executor;
     }
 
     @Override
     public <T> T selectOne(String statement, Object parameter) {
-        MappedStatement mappedStatement = null;
-        try {
-            mappedStatement = configuration.getMappedStatement(statement);
-            Environment environment = configuration.getEnvironment();
-            Connection connection = environment.getDataSource().getConnection();
-            BoundSql boundSql = mappedStatement.getBoundSql();
-            PreparedStatement preparedStatement = connection.prepareStatement(boundSql.getSql());
-            preparedStatement.setLong(1,Long.parseLong(((Object[]) parameter)[0].toString()));
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<T> objList = resultSet2Obj(resultSet, Class.forName(boundSql.getResultType()));
-            return objList.get(0);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        MappedStatement mappedStatement = configuration.getMappedStatement(statement);
+        List<T> list = executor.query(mappedStatement, parameter, Executor.NO_RESULT_HANDLER, mappedStatement.getBoundSql());
+        return list.size() == 0 ? null : list.get(0);
     }
 
     private <T> List<T> resultSet2Obj(ResultSet resultSet, Class<?> clazz) {
@@ -43,7 +36,7 @@ public class DefaultSqlSession implements SqlSession {
         try {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 T o = (T) clazz.newInstance();
                 for (int i = 1; i <= columnCount; i++) {
                     Object object = resultSet.getObject(i);
