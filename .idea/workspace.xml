@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="modify">
+    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="池化和无池化技术">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PoolState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PoolState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mybatis/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mybatis/MyTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/mybatis-config-datasource.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/mybatis-config-datasource.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +73,7 @@
       <recent name="1" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MyTest.test_SqlSessionFactory">
+  <component name="RunManager" selected="JUnit.MyTest.test_pooled">
     <configuration name="MyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mybatisDemo" />
       <option name="PACKAGE_NAME" value="cn.bugstack.mybatis.test.dao" />
@@ -141,8 +141,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MyTest.test_pooled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatisDemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.mybatis.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.mybatis" />
+      <option name="MAIN_CLASS_NAME" value="org.example.mybatis.MyTest" />
+      <option name="METHOD_NAME" value="test_pooled" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MyTest.test_pooled" />
         <item itemvalue="JUnit.MyTest.test_SqlSessionFactory" />
         <item itemvalue="JUnit.MyTest.testNewInstance" />
         <item itemvalue="JUnit.MyTest.testNewInstance (1)" />
@@ -198,7 +215,7 @@
       <workItem from="1710465522066" duration="434000" />
       <workItem from="1710466027912" duration="595000" />
       <workItem from="1713789732791" duration="13300000" />
-      <workItem from="1713882665910" duration="10052000" />
+      <workItem from="1713882665910" duration="15394000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -224,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707358709508</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="池化和无池化技术">
+      <option name="closed" value="true" />
+      <created>1714051454910</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714051454910</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,23 +267,18 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="init" />
     <MESSAGE value="modify" />
-    <option name="LAST_COMMIT_MESSAGE" value="modify" />
+    <MESSAGE value="池化和无池化技术" />
+    <option name="LAST_COMMIT_MESSAGE" value="池化和无池化技术" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperRegistry.java</url>
           <line>24</line>
@@ -300,9 +320,39 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSource.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSource.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="24" />
+          <line>36</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java</url>
+          <line>200</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

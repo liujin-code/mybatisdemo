@@ -2,22 +2,21 @@ package org.example.mybatis.datasource.pooled;
 
 import lombok.SneakyThrows;
 import org.example.mybatis.datasource.unpooled.UnpooledDataSource;
-
-import java.util.logging.Logger;
-
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
 
 public class PooledDataSource implements DataSource {
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(PooledDataSource.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(PooledDataSource.class);
 
     //池状态
-    private PoolState state = new PoolState(this);
+    private final PoolState state = new PoolState(this);
 
     private final UnpooledDataSource dataSource;
     //活跃连接数
@@ -54,7 +53,7 @@ public class PooledDataSource implements DataSource {
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
-        return null;
+        throw new SQLException(getClass().getName() + " is not a wrapper.");
     }
 
     @Override
@@ -64,27 +63,27 @@ public class PooledDataSource implements DataSource {
 
     @Override
     public PrintWriter getLogWriter() throws SQLException {
-        return null;
+        return DriverManager.getLogWriter();
     }
 
     @Override
     public void setLogWriter(PrintWriter out) throws SQLException {
-
+        DriverManager.setLogWriter(out);
     }
 
     @Override
     public void setLoginTimeout(int seconds) throws SQLException {
-
+        DriverManager.setLoginTimeout(seconds);
     }
 
     @Override
     public int getLoginTimeout() throws SQLException {
-        return 0;
+        return DriverManager.getLoginTimeout();
     }
 
     @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-        return null;
+        return Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     }
 
     public void setDriver(String driver) {
@@ -108,7 +107,7 @@ public class PooledDataSource implements DataSource {
     }
 
     public int assembleConnectionTypeCode(String url, String username, String password) {
-        return ("" + url + username + password).hashCode();
+        return (url + username + password).hashCode();
     }
 
     public void setDefaultAutoCommit(boolean defaultAutoCommit) {
