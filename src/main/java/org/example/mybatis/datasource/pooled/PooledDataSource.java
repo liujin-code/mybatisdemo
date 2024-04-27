@@ -116,7 +116,41 @@ public class PooledDataSource implements DataSource {
     }
 
     private void forceCloseAll() {
+        synchronized (state) {
+            expectedConnectionTypeCode = assembleConnectionTypeCode(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
+            // 关闭活跃链接
+            for (int i = state.activeConnections.size(); i > 0; i--) {
+                try {
+                    PooledConnection conn = state.activeConnections.remove(i - 1);
+                    conn.invalid();
+
+                    Connection realConn = conn.getRealConnection();
+                    if (!realConn.getAutoCommit()) {
+                        realConn.rollback();
+                    }
+                    realConn.close();
+                } catch (Exception ignore) {
+
+                }
+            }
+            // 关闭空闲链接
+            for (int i = state.idleConnections.size(); i > 0; i--) {
+                try {
+                    PooledConnection conn = state.idleConnections.remove(i - 1);
+                    conn.invalid();
+
+                    Connection realConn = conn.getRealConnection();
+                    if (!realConn.getAutoCommit()) {
+                        realConn.rollback();
+                    }
+                } catch (Exception ignore) {
+
+                }
+            }
+            logger.info("PooledDataSource forcefully closed/removed all connections.");
+        }
     }
+
 
     private PooledConnection popConnection(String username, String password) throws SQLException, InterruptedException {
         boolean countWait = false;
