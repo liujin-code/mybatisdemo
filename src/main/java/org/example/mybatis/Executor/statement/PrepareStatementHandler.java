@@ -1,9 +1,9 @@
 package org.example.mybatis.Executor.statement;
 
 import org.example.mybatis.Executor.Executor;
-import org.example.mybatis.Executor.resultset.ResultSetHandler;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
+import org.example.mybatis.session.ResultHandler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.util.List;
 
 public class PrepareStatementHandler extends BaseStatementHandler {
-    public PrepareStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultSetHandler resultSetHandler, BoundSql boundSql) {
-        super(executor, mappedStatement, parameterObject, resultSetHandler, boundSql);
+    public PrepareStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultHandler resultHandler, BoundSql boundSql) {
+        super(executor, mappedStatement, parameterObject, resultHandler, boundSql);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class PrepareStatementHandler extends BaseStatementHandler {
     }
 
     @Override
-    public <E> List<E> query(Statement statement, ResultSetHandler resultSetHandler) throws SQLException {
+    public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
         PreparedStatement preparedStatement = (PreparedStatement) statement;
         preparedStatement.execute();
         return resultSetHandler.handlerResultSet(preparedStatement);

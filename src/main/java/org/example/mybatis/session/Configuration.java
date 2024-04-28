@@ -71,8 +71,8 @@ public class Configuration {
         return typeAliasRegistry;
     }
 
-    public StatementHandler newStateMentHandler(SimpleExecutor simpleExecutor, MappedStatement ms, Object parameter, ResultSetHandler resultSetHandler, BoundSql boundSql) {
-        return new PrepareStatementHandler(simpleExecutor, ms, parameter, resultSetHandler, boundSql);
+    public StatementHandler newStateMentHandler(SimpleExecutor simpleExecutor, MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) {
+        return new PrepareStatementHandler(simpleExecutor, ms, parameter, resultHandler, boundSql);
     }
 
     public Executor newExecutor(Transaction transaction){

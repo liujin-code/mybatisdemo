@@ -6,6 +6,7 @@ import org.example.mybatis.session.Configuration;
 import org.example.mybatis.session.SqlSession;
 
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 
 public class MapperMethod {
     private final SqlCommand command;
@@ -14,7 +15,7 @@ public class MapperMethod {
         this.command = new SqlCommand(configuration, mapperInterface, method);
     }
 
-    public Object execute(SqlSession sqlSession, Object[] args) {
+    public Object execute(SqlSession sqlSession, Object[] args) throws SQLException {
         Object result = null;
         switch (command.getType()) {
             case INSERT:

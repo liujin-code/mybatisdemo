@@ -7,6 +7,7 @@ import org.example.mybatis.mapping.MappedStatement;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DefaultResultSetHandler implements ResultSetHandler{

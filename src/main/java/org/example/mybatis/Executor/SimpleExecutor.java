@@ -1,10 +1,10 @@
 package org.example.mybatis.Executor;
 
-import org.example.mybatis.Executor.resultset.ResultSetHandler;
 import org.example.mybatis.Executor.statement.StatementHandler;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
+import org.example.mybatis.session.ResultHandler;
 import org.example.mybatis.transaction.Transaction;
 
 import java.sql.Connection;
@@ -18,11 +18,17 @@ public class SimpleExecutor extends BaseExecutor {
     }
 
     @Override
-    protected <E> List<E> doQuery(MappedStatement ms, Object parameter, ResultSetHandler resultSetHandler, BoundSql boundSql) throws SQLException {
-        Configuration configuration = ms.getConfiguration();
-        StatementHandler handler = configuration.newStateMentHandler(this, ms, parameter, resultSetHandler, boundSql);
-        Connection connection = transaction.getConnection();
-        Statement statement = handler.prepare(connection);
-        return handler.query(statement, resultSetHandler);
+    protected <E> List<E> doQuery(MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+        try {
+            Configuration configuration = ms.getConfiguration();
+            StatementHandler handler = configuration.newStateMentHandler(this, ms, parameter, resultHandler, boundSql);
+            Connection connection = transaction.getConnection();
+            Statement statement = handler.prepare(connection);
+            handler.parameterized(statement);
+            return handler.query(statement, resultHandler);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

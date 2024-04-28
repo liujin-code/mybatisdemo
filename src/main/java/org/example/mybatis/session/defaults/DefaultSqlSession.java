@@ -8,6 +8,7 @@ import org.example.mybatis.session.SqlSession;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public <T> T selectOne(String statement, Object parameter) {
+    public <T> T selectOne(String statement, Object parameter) throws SQLException {
         MappedStatement mappedStatement = configuration.getMappedStatement(statement);
         List<T> list = executor.query(mappedStatement, parameter, Executor.NO_RESULT_HANDLER, mappedStatement.getBoundSql());
         return list.size() == 0 ? null : list.get(0);

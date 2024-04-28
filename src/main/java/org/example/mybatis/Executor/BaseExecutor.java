@@ -1,10 +1,10 @@
 package org.example.mybatis.Executor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.mybatis.Executor.resultset.ResultSetHandler;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
+import org.example.mybatis.session.ResultHandler;
 import org.example.mybatis.transaction.Transaction;
 
 import java.sql.SQLException;
@@ -25,14 +25,14 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public <E> List<E> query(MappedStatement ms, Object parameter, ResultSetHandler resultSetHandler, BoundSql boundSql) {
+    public <E> List<E> query(MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
         if (closed) {
             throw new RuntimeException("Executor was closed");
         }
-        return doQuery(ms, parameter, resultSetHandler, boundSql);
+        return doQuery(ms, parameter, resultHandler, boundSql);
     }
 
-    protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, ResultSetHandler resultSetHandler, BoundSql boundSql) throws SQLException;
+    protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) throws SQLException;
     @Override
     public Transaction getTransaction() {
         if (closed) {

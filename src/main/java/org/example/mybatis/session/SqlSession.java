@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface SqlSession {
 
-    <T> T selectOne(String statement, Object parameter);
+    <T> T selectOne(String statement, Object parameter) throws SQLException;
 
     <T> T selectOne(String statement);
 

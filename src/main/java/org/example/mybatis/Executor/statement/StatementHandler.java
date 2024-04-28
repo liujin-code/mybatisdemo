@@ -1,6 +1,6 @@
 package org.example.mybatis.Executor.statement;
 
-import org.example.mybatis.Executor.resultset.ResultSetHandler;
+import org.example.mybatis.session.ResultHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,6 +17,6 @@ public interface StatementHandler {
     void parameterized(Statement statement) throws SQLException;
 
     /** 执行查询语句 */
-    <E>List<E> query(Statement statement, ResultSetHandler resultSetHandler) throws SQLException;
+    <E>List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException;
 
 }

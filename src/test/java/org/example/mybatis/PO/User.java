@@ -1,7 +1,10 @@
 package org.example.mybatis.PO;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class User {
 
     private Long id;
