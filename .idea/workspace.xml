@@ -5,20 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加forceCloseAll">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ApiTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/Reflector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/SystemMetaObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/factory/DefaultObjectFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/factory/ObjectFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/GetFieldInvoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/Invoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/MethodInvoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/SetFieldInvoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/property/PropertyNamer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/property/PropertyTokenizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/BaseWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/BeanWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/CollectionWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/DefaultObjectWrapperFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/MapWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/ObjectWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/ObjectWrapperFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ReflectionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PrepareStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PrepareStatementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/SimpleStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/SimpleStatementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/StatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/StatementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/SqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/SqlSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mybatis/PO/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mybatis/PO/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSourceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSourceFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,28 +94,12 @@
       <recent name="org.example.mybatis.session" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApiTest.test_SqlSessionFactory">
+  <component name="RunManager" selected="JUnit.ReflectionTest.test_reflection">
     <configuration name="ApiTest.test_SqlSessionFactory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mybatisDemo" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ApiTest" />
       <option name="METHOD_NAME" value="test_SqlSessionFactory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MyTest.testNewInstance (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="mybatisDemo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.mybatis.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.mybatis" />
-      <option name="MAIN_CLASS_NAME" value="org.example.mybatis.MyTest" />
-      <option name="METHOD_NAME" value="testNewInstance" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -170,13 +163,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ReflectionTest.test_reflection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mybatisDemo" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ReflectionTest" />
+      <option name="METHOD_NAME" value="test_reflection" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReflectionTest.test_reflection" />
         <item itemvalue="JUnit.ApiTest.test_SqlSessionFactory" />
         <item itemvalue="JUnit.MyTest.test_SqlSessionFactory" />
         <item itemvalue="JUnit.MyTest.test_pooled" />
         <item itemvalue="JUnit.MyTest.testNewInstance" />
-        <item itemvalue="JUnit.MyTest.testNewInstance (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +231,8 @@
       <workItem from="1710465522066" duration="434000" />
       <workItem from="1710466027912" duration="595000" />
       <workItem from="1713789732791" duration="13300000" />
-      <workItem from="1713882665910" duration="30406000" />
+      <workItem from="1713882665910" duration="36758000" />
+      <workItem from="1714539429806" duration="36679000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -286,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714221294423</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="添加forceCloseAll">
+      <option name="closed" value="true" />
+      <created>1714311942907</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1714311942907</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,12 +397,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java</url>
-          <line>28</line>
+          <line>27</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java</url>
-          <line>42</line>
+          <line>43</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
