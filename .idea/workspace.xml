@@ -4,30 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加forceCloseAll">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/Reflector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/SystemMetaObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/factory/DefaultObjectFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/factory/ObjectFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/GetFieldInvoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/Invoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/MethodInvoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/invoker/SetFieldInvoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/property/PropertyNamer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/property/PropertyTokenizer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/BaseWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/BeanWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/CollectionWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/DefaultObjectWrapperFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/MapWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/ObjectWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/wrapper/ObjectWrapperFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ReflectionTest.java" afterDir="false" />
+    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加reflactor">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/ParameterExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/SqlSourceBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/StaticSqlSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLMapperBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLStatementBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/SqlSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/parsing/GenericTokenParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/parsing/TokenHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/LanguageDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/LanguageDriverRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/defaults/RawSqlSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/DynamicContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/MixedSqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/SqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/StaticTextSqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLLanguageDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLScriptBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandlerRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSourceFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSourceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSourceFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/BaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/BaseBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/io/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/io/Resources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/BoundSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/BoundSql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/ParameterMapping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/ParameterMapping.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeAliasRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeAliasRegistry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,43 +67,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/yy/IdeaProjects/mybatisdemo/src/main/java/org/example/mybatis",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.example.mybatis.builder" />
+      <recent name="org.example.mybatis.session" />
       <recent name="dao" />
       <recent name="1" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/example/mybatis" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.mybatis.builder" />
       <recent name="" />
       <recent name="org.example.mybatis.session" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ReflectionTest.test_reflection">
+  <component name="RunManager" selected="JUnit.ApiTest.test_SqlSessionFactory">
     <configuration name="ApiTest.test_SqlSessionFactory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mybatisDemo" />
       <option name="PACKAGE_NAME" value="" />
@@ -175,8 +191,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ReflectionTest.test_reflection" />
         <item itemvalue="JUnit.ApiTest.test_SqlSessionFactory" />
+        <item itemvalue="JUnit.ReflectionTest.test_reflection" />
         <item itemvalue="JUnit.MyTest.test_SqlSessionFactory" />
         <item itemvalue="JUnit.MyTest.test_pooled" />
         <item itemvalue="JUnit.MyTest.testNewInstance" />
@@ -232,7 +248,7 @@
       <workItem from="1710466027912" duration="595000" />
       <workItem from="1713789732791" duration="13300000" />
       <workItem from="1713882665910" duration="36758000" />
-      <workItem from="1714539429806" duration="36679000" />
+      <workItem from="1714539429806" duration="72118000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -298,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714311942907</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="添加reflactor">
+      <option name="closed" value="true" />
+      <created>1714819310946</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714819310946</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,86 +348,52 @@
     <MESSAGE value="池化和无池化技术" />
     <MESSAGE value="添加executor" />
     <MESSAGE value="添加forceCloseAll" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加forceCloseAll" />
+    <MESSAGE value="添加reflactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加reflactor" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperRegistry.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/src/test/java/ReflectionTest.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="17" />
+          <url>file://$PROJECT_DIR$/src/test/java/ReflectionTest.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/defaults/RawSqlSource.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="19" />
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/session/SqlSessionFactoryBuilder.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/SqlSourceBuilder.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/parsing/GenericTokenParser.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperProxyFactory.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperProxy.java</url>
           <line>28</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSource.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSource.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/unpooled/UnpooledDataSource.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java</url>
-          <line>158</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledConnection.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/datasource/pooled/PooledDataSource.java</url>
-          <line>232</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

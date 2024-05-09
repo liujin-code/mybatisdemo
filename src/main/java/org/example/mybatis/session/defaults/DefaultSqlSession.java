@@ -5,13 +5,7 @@ import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
 import org.example.mybatis.session.SqlSession;
 
-import java.lang.reflect.Method;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DefaultSqlSession implements SqlSession {
@@ -28,36 +22,36 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <T> T selectOne(String statement, Object parameter) throws SQLException {
         MappedStatement mappedStatement = configuration.getMappedStatement(statement);
-        List<T> list = executor.query(mappedStatement, parameter, Executor.NO_RESULT_HANDLER, mappedStatement.getBoundSql());
+        List<T> list = executor.query(mappedStatement, parameter, Executor.NO_RESULT_HANDLER, mappedStatement.getSqlSource().getBoundSql(parameter));
         return list.size() == 0 ? null : list.get(0);
     }
 
-    private <T> List<T> resultSet2Obj(ResultSet resultSet, Class<?> clazz) {
-        List<T> list = new ArrayList<>();
-        try {
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            while (resultSet.next()) {
-                T o = (T) clazz.newInstance();
-                for (int i = 1; i <= columnCount; i++) {
-                    Object object = resultSet.getObject(i);
-                    String columnName = metaData.getColumnName(i);
-                    String methodName = "set" + columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
-                    Method method;
-                    if (object instanceof Timestamp) {
-                        method = clazz.getMethod(methodName, Date.class);
-                    } else {
-                        method = clazz.getMethod(methodName, object.getClass());
-                    }
-                    method.invoke(o, object);
-                }
-                list.add(o);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-    }
+//    private <T> List<T> resultSet2Obj(ResultSet resultSet, Class<?> clazz) {
+//        List<T> list = new ArrayList<>();
+//        try {
+//            ResultSetMetaData metaData = resultSet.getMetaData();
+//            int columnCount = metaData.getColumnCount();
+//            while (resultSet.next()) {
+//                T o = (T) clazz.newInstance();
+//                for (int i = 1; i <= columnCount; i++) {
+//                    Object object = resultSet.getObject(i);
+//                    String columnName = metaData.getColumnName(i);
+//                    String methodName = "set" + columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
+//                    Method method;
+//                    if (object instanceof Timestamp) {
+//                        method = clazz.getMethod(methodName, Date.class);
+//                    } else {
+//                        method = clazz.getMethod(methodName, object.getClass());
+//                    }
+//                    method.invoke(o, object);
+//                }
+//                list.add(o);
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return list;
+//    }
 
     @Override
     public <T> T selectOne(String statement) {

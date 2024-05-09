@@ -9,7 +9,7 @@ public class Resources {
         return new InputStreamReader(getResourceAsStream(resource));
     }
 
-    private static InputStream getResourceAsStream(String resource) {
+    public static InputStream getResourceAsStream(String resource) {
         ClassLoader[] classLoaders = getClassLoaders();
         for (ClassLoader classLoader : classLoaders) {
             InputStream resourceAsStream = classLoader.getResourceAsStream(resource);
@@ -19,7 +19,7 @@ public class Resources {
         }
         return null;
     }
-    private static ClassLoader[] getClassLoaders() {
+    public static ClassLoader[] getClassLoaders() {
         return new ClassLoader[] {
                 Thread.currentThread().getContextClassLoader(),
                 ClassLoader.getSystemClassLoader()

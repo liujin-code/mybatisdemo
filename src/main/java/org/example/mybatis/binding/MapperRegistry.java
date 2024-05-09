@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class MapperRegistry {
 
-    private Configuration configuration;
+    private final Configuration configuration;
 
     public MapperRegistry(Configuration configuration) {
         this.configuration = configuration;
@@ -19,10 +19,15 @@ public class MapperRegistry {
     private final Map<Class<?>,MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
     public <T> T getMapper(Class<T> type,SqlSession sqlSession){
-        if (!hasMapper(type)){
-            throw new RuntimeException("Type "+type+" is not known to the MapperRegistry.");
+        final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
+        if (mapperProxyFactory == null) {
+            throw new RuntimeException("Type " + type + " is not known to the MapperRegistry.");
         }
-        return (T) knownMappers.get(type).newInstance(sqlSession);
+        try {
+            return mapperProxyFactory.newInstance(sqlSession);
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting mapper instance. Cause: " + e, e);
+        }
     }
 
     public <T> void addMapper(Class<T> type){
