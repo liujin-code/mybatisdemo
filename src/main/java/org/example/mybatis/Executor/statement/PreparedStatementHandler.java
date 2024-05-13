@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class PrepareStatementHandler extends BaseStatementHandler {
-    public PrepareStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultHandler resultHandler, BoundSql boundSql) {
+public class PreparedStatementHandler extends BaseStatementHandler {
+    public PreparedStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultHandler resultHandler, BoundSql boundSql) {
         super(executor, mappedStatement, parameterObject, resultHandler, boundSql);
     }
 

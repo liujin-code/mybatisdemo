@@ -4,14 +4,18 @@ import org.example.mybatis.mapping.ParameterMapping;
 import org.example.mybatis.mapping.SqlSource;
 import org.example.mybatis.parsing.GenericTokenParser;
 import org.example.mybatis.parsing.TokenHandler;
+import org.example.mybatis.reflection.MetaClass;
 import org.example.mybatis.reflection.MetaObject;
 import org.example.mybatis.session.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class SqlSourceBuilder extends BaseBuilder {
+    private static final Logger logger = LoggerFactory.getLogger(SqlSourceBuilder.class);
 
     private static final String parameterProperties = "javaType,jdbcType,mode,numericScale,resultMap,typeHandler,jdbcTypeName";
 
@@ -54,6 +58,20 @@ public class SqlSourceBuilder extends BaseBuilder {
             Map<String, String> propertiesMap = new ParameterExpression(content);
             String property = propertiesMap.get("property");
             Class<?> propertyType = parameterType;
+            if (typeHandlerRegistry.hasTypeHandler(propertyType)){
+                propertyType = parameterType;
+            } else if (property != null) {
+                MetaClass metaClass = MetaClass.forClass(parameterType);
+                if (metaClass.hasGetter(property)) {
+                    propertyType = metaClass.getGetterType(property);
+                } else {
+                    propertyType = Object.class;
+                }
+            } else {
+                propertyType = Object.class;
+            }
+
+            logger.info("构建参数映射 property：{} propertyType：{}", property, propertyType);
             ParameterMapping.Builder builder = new ParameterMapping.Builder(configuration, property, propertyType);
             return builder.build();
         }

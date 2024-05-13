@@ -5,7 +5,7 @@ import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.Executor.SimpleExecutor;
 import org.example.mybatis.Executor.resultset.DefaultResultSetHandler;
 import org.example.mybatis.Executor.resultset.ResultSetHandler;
-import org.example.mybatis.Executor.statement.PrepareStatementHandler;
+import org.example.mybatis.Executor.statement.PreparedStatementHandler;
 import org.example.mybatis.Executor.statement.StatementHandler;
 import org.example.mybatis.binding.MapperRegistry;
 import org.example.mybatis.datasource.druid.DruidDataSourceFactory;
@@ -96,7 +96,7 @@ public class Configuration {
     }
 
     public StatementHandler newStateMentHandler(SimpleExecutor simpleExecutor, MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) {
-        return new PrepareStatementHandler(simpleExecutor, ms, parameter, resultHandler, boundSql);
+        return new PreparedStatementHandler(simpleExecutor, ms, parameter, resultHandler, boundSql);
     }
 
     public Executor newExecutor(Transaction transaction){
