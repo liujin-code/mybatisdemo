@@ -4,6 +4,7 @@ import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.ResultHandler;
+import org.example.mybatis.session.RowBounds;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +13,8 @@ import java.sql.Statement;
 import java.util.List;
 
 public class PreparedStatementHandler extends BaseStatementHandler {
-    public PreparedStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultHandler resultHandler, BoundSql boundSql) {
-        super(executor, mappedStatement, parameterObject, resultHandler, boundSql);
+    public PreparedStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+        super(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class PreparedStatementHandler extends BaseStatementHandler {
     }
 
     @Override
-    public void parameterized(Statement statement) throws SQLException {
+    public void parameterize(Statement statement) throws SQLException {
         PreparedStatement preparedStatement = (PreparedStatement) statement;
         preparedStatement.setLong(1, Long.parseLong(((Object[]) parameterObject)[0].toString()));
     }
@@ -32,6 +33,6 @@ public class PreparedStatementHandler extends BaseStatementHandler {
     public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
         PreparedStatement preparedStatement = (PreparedStatement) statement;
         preparedStatement.execute();
-        return resultSetHandler.handlerResultSet(preparedStatement);
+        return resultSetHandler.handleResultSets(preparedStatement);
     }
 }

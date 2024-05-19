@@ -5,6 +5,7 @@ import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
 import org.example.mybatis.session.ResultHandler;
+import org.example.mybatis.session.RowBounds;
 import org.example.mybatis.transaction.Transaction;
 
 import java.sql.SQLException;
@@ -25,14 +26,14 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public <E> List<E> query(MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+    public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
         if (closed) {
-            throw new RuntimeException("Executor was closed");
+            throw new RuntimeException("Executor was closed.");
         }
-        return doQuery(ms, parameter, resultHandler, boundSql);
+        return doQuery(ms, parameter, rowBounds, resultHandler, boundSql);
     }
 
-    protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) throws SQLException;
+    protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql);
     @Override
     public Transaction getTransaction() {
         if (closed) {

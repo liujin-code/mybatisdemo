@@ -1,11 +1,13 @@
 package org.example.mybatis.Executor.statement;
 
 import org.example.mybatis.Executor.Executor;
+import org.example.mybatis.Executor.parameter.ParameterHandler;
 import org.example.mybatis.Executor.resultset.ResultSetHandler;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
 import org.example.mybatis.session.ResultHandler;
+import org.example.mybatis.session.RowBounds;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,18 +20,22 @@ public abstract class BaseStatementHandler implements StatementHandler {
     protected final MappedStatement mappedStatement;
 
     protected final Object parameterObject;
-
     protected final ResultSetHandler resultSetHandler;
+    protected final ParameterHandler parameterHandler;
 
+    protected final RowBounds rowBounds;
     protected BoundSql boundSql;
 
-    public BaseStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, ResultHandler resultHandler, BoundSql boundSql) {
+    public BaseStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
         this.configuration = mappedStatement.getConfiguration();
         this.executor = executor;
         this.mappedStatement = mappedStatement;
-        this.parameterObject = parameterObject;
-        this.resultSetHandler = configuration.newResultSetHandler(executor, mappedStatement, boundSql);
+        this.rowBounds = rowBounds;
         this.boundSql = boundSql;
+
+        this.parameterObject = parameterObject;
+        this.parameterHandler = configuration.newParameterHandler(mappedStatement, parameterObject, boundSql);
+        this.resultSetHandler = configuration.newResultSetHandler(executor, mappedStatement, rowBounds, resultHandler, boundSql);
     }
 
     @Override

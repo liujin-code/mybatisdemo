@@ -3,6 +3,7 @@ package org.example.mybatis.session;
 import lombok.Data;
 import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.Executor.SimpleExecutor;
+import org.example.mybatis.Executor.parameter.ParameterHandler;
 import org.example.mybatis.Executor.resultset.DefaultResultSetHandler;
 import org.example.mybatis.Executor.resultset.ResultSetHandler;
 import org.example.mybatis.Executor.statement.PreparedStatementHandler;
@@ -19,6 +20,7 @@ import org.example.mybatis.reflection.factory.DefaultObjectFactory;
 import org.example.mybatis.reflection.factory.ObjectFactory;
 import org.example.mybatis.reflection.wrapper.DefaultObjectWrapperFactory;
 import org.example.mybatis.reflection.wrapper.ObjectWrapperFactory;
+import org.example.mybatis.scripting.LanguageDriver;
 import org.example.mybatis.scripting.LanguageDriverRegistry;
 import org.example.mybatis.scripting.xmltags.XMLLanguageDriver;
 import org.example.mybatis.transaction.Transaction;
@@ -33,30 +35,39 @@ import java.util.Set;
 
 @Data
 public class Configuration {
+
     //环境
     protected Environment environment;
-    //映射注册机
-    protected final MapperRegistry mapperRegistry = new MapperRegistry(this);
-    //映射的语句
+
+    // 映射注册机
+    protected MapperRegistry mapperRegistry = new MapperRegistry(this);
+
+    // 映射的语句，存在Map里
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
+
     // 类型别名注册机
     protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
-    // 脚本语言注册器
-    protected final LanguageDriverRegistry languageDriverRegistry = new LanguageDriverRegistry();
-    // 类型处理注册器
+    protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
+
+    // 类型处理器注册机
     protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
+
     // 对象工厂和对象包装器工厂
     protected ObjectFactory objectFactory = new DefaultObjectFactory();
     protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
+
     protected final Set<String> loadedResources = new HashSet<>();
+
     protected String databaseId;
+
     public Configuration() {
-        typeAliasRegistry.registerAlias("jdbc", JdbcTransactionFactory.class);
-        typeAliasRegistry.registerAlias("druid", DruidDataSourceFactory.class);
+        typeAliasRegistry.registerAlias("JDBC", JdbcTransactionFactory.class);
+
+        typeAliasRegistry.registerAlias("DRUID", DruidDataSourceFactory.class);
         typeAliasRegistry.registerAlias("UNPOOLED", UnpooledDataSourceFactory.class);
         typeAliasRegistry.registerAlias("POOLED", PooledDataSourceFactory.class);
 
-        languageDriverRegistry.setDefaultDriverClass(XMLLanguageDriver.class);
+        languageRegistry.setDefaultDriverClass(XMLLanguageDriver.class);
     }
 
     public void addMappers(String packageName) {
@@ -75,12 +86,16 @@ public class Configuration {
         return mapperRegistry.hasMapper(type);
     }
 
+    public void addMappedStatement(MappedStatement ms) {
+        mappedStatements.put(ms.getId(), ms);
+    }
+
     public MappedStatement getMappedStatement(String id) {
         return mappedStatements.get(id);
     }
 
-    public void addMappedStatement(MappedStatement mappedStatement) {
-        mappedStatements.put(mappedStatement.getId(), mappedStatement);
+    public TypeAliasRegistry getTypeAliasRegistry() {
+        return typeAliasRegistry;
     }
 
     public Environment getEnvironment() {
@@ -91,23 +106,39 @@ public class Configuration {
         this.environment = environment;
     }
 
-    public TypeAliasRegistry getTypeAliasRegistry() {
-        return typeAliasRegistry;
+    public String getDatabaseId() {
+        return databaseId;
     }
 
-    public StatementHandler newStateMentHandler(SimpleExecutor simpleExecutor, MappedStatement ms, Object parameter, ResultHandler resultHandler, BoundSql boundSql) {
-        return new PreparedStatementHandler(simpleExecutor, ms, parameter, resultHandler, boundSql);
+    /**
+     * 创建结果集处理器
+     */
+    public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+        return new DefaultResultSetHandler(executor, mappedStatement, resultHandler, rowBounds, boundSql);
     }
 
-    public Executor newExecutor(Transaction transaction){
+    /**
+     * 生产执行器
+     */
+    public Executor newExecutor(Transaction transaction) {
         return new SimpleExecutor(this, transaction);
     }
-    public ResultSetHandler newResultSetHandler(Executor executor, MappedStatement mappedStatement, BoundSql boundSql) {
-        return new DefaultResultSetHandler(executor,mappedStatement,boundSql);
+
+    /**
+     * 创建语句处理器
+     */
+    public StatementHandler newStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+        return new PreparedStatementHandler(executor, mappedStatement, parameter, rowBounds, resultHandler, boundSql);
     }
 
-    public MetaObject newMetaObject(Object parameterObject) {
-        return MetaObject.forObject(parameterObject, objectFactory, objectWrapperFactory);
+    // 创建元对象
+    public MetaObject newMetaObject(Object object) {
+        return MetaObject.forObject(object, objectFactory, objectWrapperFactory);
+    }
+
+    // 类型处理器注册机
+    public TypeHandlerRegistry getTypeHandlerRegistry() {
+        return typeHandlerRegistry;
     }
 
     public boolean isResourceLoaded(String resource) {
@@ -119,6 +150,22 @@ public class Configuration {
     }
 
     public LanguageDriverRegistry getLanguageRegistry() {
-        return languageDriverRegistry;
+        return languageRegistry;
     }
+
+    public ParameterHandler newParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {
+        // 创建参数处理器
+        ParameterHandler parameterHandler = mappedStatement.getLang().createParameterHandler(mappedStatement, parameterObject, boundSql);
+        // 插件的一些参数，也是在这里处理，暂时不添加这部分内容 interceptorChain.pluginAll(parameterHandler);
+        return parameterHandler;
+    }
+
+    public LanguageDriver getDefaultScriptingLanguageInstance() {
+        return languageRegistry.getDefaultDriver();
+    }
+
+    public ObjectFactory getObjectFactory() {
+        return objectFactory;
+    }
+
 }

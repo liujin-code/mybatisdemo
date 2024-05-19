@@ -14,7 +14,7 @@ public interface StatementHandler {
     Statement prepare(Connection connection) throws SQLException;
 
     /** 参数化 */
-    void parameterized(Statement statement) throws SQLException;
+    void parameterize(Statement statement) throws SQLException;
 
     /** 执行查询语句 */
     <E>List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException;

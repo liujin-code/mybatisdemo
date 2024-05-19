@@ -1,14 +1,20 @@
 package org.example.mybatis.session.defaults;
 
+import com.alibaba.fastjson.JSON;
 import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.Configuration;
+import org.example.mybatis.session.RowBounds;
 import org.example.mybatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DefaultSqlSession implements SqlSession {
+
+    private final Logger logger = LoggerFactory.getLogger(DefaultSqlSession.class);
 
     private final Configuration configuration;
 
@@ -21,9 +27,10 @@ public class DefaultSqlSession implements SqlSession {
 
     @Override
     public <T> T selectOne(String statement, Object parameter) throws SQLException {
-        MappedStatement mappedStatement = configuration.getMappedStatement(statement);
-        List<T> list = executor.query(mappedStatement, parameter, Executor.NO_RESULT_HANDLER, mappedStatement.getSqlSource().getBoundSql(parameter));
-        return list.size() == 0 ? null : list.get(0);
+        logger.info("执行查询 statement：{} parameter：{}", statement, JSON.toJSONString(parameter));
+        MappedStatement ms = configuration.getMappedStatement(statement);
+        List<T> list = executor.query(ms, parameter, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER, ms.getSqlSource().getBoundSql(parameter));
+        return list.get(0);
     }
 
 //    private <T> List<T> resultSet2Obj(ResultSet resultSet, Class<?> clazz) {
