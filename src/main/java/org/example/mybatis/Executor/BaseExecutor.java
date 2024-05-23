@@ -9,6 +9,7 @@ import org.example.mybatis.session.RowBounds;
 import org.example.mybatis.transaction.Transaction;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +25,13 @@ public abstract class BaseExecutor implements Executor {
         this.transaction = transaction;
         this.wrapper = this;
     }
+
+    @Override
+    public int update(MappedStatement ms, Object parameter) throws SQLException {
+        return doUpdate(ms, parameter);
+    }
+
+    protected abstract int doUpdate(MappedStatement ms, Object parameter) throws SQLException;
 
     @Override
     public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
@@ -72,6 +80,15 @@ public abstract class BaseExecutor implements Executor {
         } finally {
             transaction = null;
             closed = true;
+        }
+    }
+
+    protected void closeStatement(Statement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException ignore) {
+            }
         }
     }
 }

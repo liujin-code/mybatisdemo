@@ -4,37 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加parameterType映射">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/result/DefaultResultContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/result/DefaultResultHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/ResultSetWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/MapperBuilderAssistant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/ResultMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/ResultMapping.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/ResultContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/RowBounds.java" afterDir="false" />
+    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加结果集处理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/ResultSetHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/ResultSetHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PreparedStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PreparedStatementHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/SimpleStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/SimpleStatementHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/StatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/StatementHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLMapperBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLMapperBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLStatementBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLStatementBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/LanguageDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/LanguageDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLLanguageDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLLanguageDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/ResultHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/ResultHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/SqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/SqlSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/BaseTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/BaseTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/LongTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/LongTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/StringTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/StringTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSessionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSessionFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +232,8 @@
       <workItem from="1713789732791" duration="13300000" />
       <workItem from="1713882665910" duration="36758000" />
       <workItem from="1714539429806" duration="105182000" />
-      <workItem from="1716113401150" duration="6575000" />
+      <workItem from="1716113401150" duration="8676000" />
+      <workItem from="1716207370548" duration="1839000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -340,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715610045204</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="添加结果集处理">
+      <option name="closed" value="true" />
+      <created>1716131290887</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716131290887</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +360,8 @@
     <MESSAGE value="添加reflactor" />
     <MESSAGE value="添加xml" />
     <MESSAGE value="添加parameterType映射" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加parameterType映射" />
+    <MESSAGE value="添加结果集处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加结果集处理" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -412,7 +404,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java</url>
-          <line>68</line>
+          <line>86</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -452,7 +444,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/SimpleExecutor.java</url>
-          <line>28</line>
+          <line>52</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -474,6 +466,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/ResultSetWrapper.java</url>
           <line>29</line>
           <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/binding/MapperMethod.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
