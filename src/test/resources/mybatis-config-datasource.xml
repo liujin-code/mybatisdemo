@@ -17,7 +17,9 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/User_Mapper.xml"/>
+<!--        <mapper resource="mapper/User_Mapper.xml"/>-->
+        <!--注解配置-->
+        <mapper class="org.example.mybatis.dao.IUserDao"/>
     </mappers>
 
 </configuration>

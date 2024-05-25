@@ -20,4 +20,9 @@ public interface LanguageDriver {
      * 创建参数处理器
      */
     ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql);
+
+    /**
+     * 创建SQL源码(annotation 注解方式)
+     */
+    SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType);
 }

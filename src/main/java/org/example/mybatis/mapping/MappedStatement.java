@@ -28,6 +28,10 @@ public class MappedStatement {
         return lang;
     }
 
+    public BoundSql getBoundSql(Object parameterObject) {
+        return sqlSource.getBoundSql(parameterObject);
+    }
+
 
     /**
      * 建造者

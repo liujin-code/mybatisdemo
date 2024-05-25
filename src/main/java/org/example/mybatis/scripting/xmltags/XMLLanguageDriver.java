@@ -7,6 +7,7 @@ import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.mapping.SqlSource;
 import org.example.mybatis.scripting.LanguageDriver;
 import org.example.mybatis.scripting.defaults.DefaultParameterHandler;
+import org.example.mybatis.scripting.defaults.RawSqlSource;
 import org.example.mybatis.session.Configuration;
 
 public class XMLLanguageDriver implements LanguageDriver {
@@ -20,5 +21,11 @@ public class XMLLanguageDriver implements LanguageDriver {
     @Override
     public ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql) {
         return new DefaultParameterHandler(mappedStatement, parameterObject, boundSql);
+    }
+
+    @Override
+    public SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType) {
+        // 暂时不解析动态 SQL
+        return new RawSqlSource(configuration, script, parameterType);
     }
 }

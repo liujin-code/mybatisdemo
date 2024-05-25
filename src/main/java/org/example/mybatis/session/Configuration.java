@@ -15,6 +15,7 @@ import org.example.mybatis.datasource.unpooled.UnpooledDataSourceFactory;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.Environment;
 import org.example.mybatis.mapping.MappedStatement;
+import org.example.mybatis.mapping.ResultMap;
 import org.example.mybatis.reflection.MetaObject;
 import org.example.mybatis.reflection.factory.DefaultObjectFactory;
 import org.example.mybatis.reflection.factory.ObjectFactory;
@@ -44,6 +45,8 @@ public class Configuration {
 
     // 映射的语句，存在Map里
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
+    // 结果映射，存在Map里
+    protected final Map<String, ResultMap> resultMaps = new HashMap<>();
 
     // 类型别名注册机
     protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
@@ -168,4 +171,7 @@ public class Configuration {
         return objectFactory;
     }
 
+    public void addResultMap(ResultMap resultMap) {
+        resultMaps.put(resultMap.getId(), resultMap);
+    }
 }
