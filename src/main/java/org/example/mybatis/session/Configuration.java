@@ -171,6 +171,10 @@ public class Configuration {
         return objectFactory;
     }
 
+    public ResultMap getResultMap(String id) {
+        return resultMaps.get(id);
+    }
+
     public void addResultMap(ResultMap resultMap) {
         resultMaps.put(resultMap.getId(), resultMap);
     }

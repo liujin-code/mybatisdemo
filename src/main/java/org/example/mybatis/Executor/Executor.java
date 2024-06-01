@@ -12,7 +12,7 @@ import java.util.List;
 public interface Executor {
     ResultHandler NO_RESULT_HANDLER = null;
 
-    <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql);
+    <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException;
 
     int update(MappedStatement ms, Object parameter) throws SQLException;
 

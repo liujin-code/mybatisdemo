@@ -1,6 +1,7 @@
 package org.example.mybatis.type;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class TypeHandlerRegistry {
     public TypeHandlerRegistry() {
         register(Long.class, new LongTypeHandler());
         register(long.class, new LongTypeHandler());
+        register(Date.class, new DateTypeHandler());
 
         register(String.class, new StringTypeHandler());
         register(String.class, JdbcType.CHAR, new StringTypeHandler());
@@ -57,5 +59,9 @@ public class TypeHandlerRegistry {
         }
         // type drives generics here
         return (TypeHandler<T>) handler;
+    }
+
+    public TypeHandler<?> getMappingTypeHandler(Class<? extends TypeHandler<?>> handlerType) {
+        return ALL_TYPE_HANDLERS_MAP.get(handlerType);
     }
 }

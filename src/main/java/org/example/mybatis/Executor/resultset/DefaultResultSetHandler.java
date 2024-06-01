@@ -31,6 +31,7 @@ import java.util.Locale;
  * @copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 public class DefaultResultSetHandler implements ResultSetHandler {
+    private static final Object NO_VALUE = new Object();
 
     private final Configuration configuration;
     private final MappedStatement mappedStatement;
@@ -117,9 +118,34 @@ public class DefaultResultSetHandler implements ResultSetHandler {
         Object resultObject = createResultObject(rsw, resultMap, null);
         if (resultObject != null && !typeHandlerRegistry.hasTypeHandler(resultMap.getType())) {
             final MetaObject metaObject = configuration.newMetaObject(resultObject);
+            // 自动映射：把每列的值都赋到对应的字段上
             applyAutomaticMappings(rsw, resultMap, metaObject, null);
+            // Map映射：根据映射类型赋值到字段
+            applyPropertyMappings(rsw, resultMap, metaObject, null);
         }
         return resultObject;
+    }
+
+    private boolean applyPropertyMappings(ResultSetWrapper rsw, ResultMap resultMap, MetaObject metaObject, String columnPrefix) throws SQLException {
+        final List<String> mappedColumnNames = rsw.getMappedColumnNames(resultMap, columnPrefix);
+        boolean foundValues = false;
+        final List<ResultMapping> propertyMappings = resultMap.getPropertyResultMappings();
+        for (ResultMapping propertyMapping : propertyMappings) {
+            final String column = propertyMapping.getColumn();
+            if (column != null && mappedColumnNames.contains(column.toUpperCase(Locale.ENGLISH))) {
+                // 获取值
+                final TypeHandler<?> typeHandler = propertyMapping.getTypeHandler();
+                Object value = typeHandler.getResult(rsw.getResultSet(), column);
+                // 设置值
+                final String property = propertyMapping.getProperty();
+                if (value != NO_VALUE && property != null && value != null) {
+                    // 通过反射工具类设置属性值
+                    metaObject.setValue(property, value);
+                    foundValues = true;
+                }
+            }
+        }
+        return foundValues;
     }
 
     private Object createResultObject(ResultSetWrapper rsw, ResultMap resultMap, String columnPrefix) throws SQLException {

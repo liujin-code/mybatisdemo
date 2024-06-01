@@ -2,6 +2,7 @@ package org.example.mybatis.builder;
 
 import org.example.mybatis.session.Configuration;
 import org.example.mybatis.type.TypeAliasRegistry;
+import org.example.mybatis.type.TypeHandler;
 import org.example.mybatis.type.TypeHandlerRegistry;
 
 public abstract class BaseBuilder {
@@ -23,5 +24,12 @@ public abstract class BaseBuilder {
 
     protected Class<?> resolveAlias(String alias) {
         return typeAliasRegistry.resolveAlias(alias);
+    }
+
+    protected TypeHandler<?> resolveTypeHandler(Class<?> javaType, Class<? extends TypeHandler<?>> typeHandlerType) {
+        if (typeHandlerType == null){
+            return null;
+        }
+        return typeHandlerRegistry.getMappingTypeHandler(typeHandlerType);
     }
 }
