@@ -20,6 +20,12 @@ public abstract class BaseExecutor implements Executor {
     protected Executor wrapper;
     private boolean closed;
 
+    @Override
+    public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
+        BoundSql boundSql = ms.getBoundSql(parameter);
+        return query(ms, parameter, rowBounds, resultHandler, boundSql);
+    }
+
     public BaseExecutor(Configuration configuration, Transaction transaction) {
         this.configuration = configuration;
         this.transaction = transaction;

@@ -187,4 +187,8 @@ public class MetaObject {
     public <E> void addAll(List<E> element) {
         objectWrapper.addAll(element);
     }
+
+    public Object getOriginalObject() {
+        return originObject;
+    }
 }

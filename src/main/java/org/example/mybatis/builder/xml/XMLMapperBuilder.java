@@ -123,18 +123,6 @@ public class XMLMapperBuilder extends BaseBuilder {
         return builderAssistant.buildResultMapping(resultType, property, column, flags);
     }
 
-    private Class<?> resolveClass(String alias) {
-        if(alias == null){
-            return null;
-        }
-
-        try {
-            return resolveAlias(alias);
-        } catch (Exception e) {
-            throw new RuntimeException("Error resolving class. Cause: " + e, e);
-        }
-    }
-
     // 配置select|insert|update|delete
     private void buildStatementFromContext(List<Element>... lists) {
         for (List<Element> list : lists) {

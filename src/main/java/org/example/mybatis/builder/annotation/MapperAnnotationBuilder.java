@@ -1,5 +1,8 @@
 package org.example.mybatis.builder.annotation;
 
+import org.example.mybatis.Executor.keygen.Jdbc3KeyGenerator;
+import org.example.mybatis.Executor.keygen.KeyGenerator;
+import org.example.mybatis.Executor.keygen.NoKeyGenerator;
 import org.example.mybatis.annotation.Delete;
 import org.example.mybatis.annotation.Insert;
 import org.example.mybatis.annotation.Select;
@@ -63,6 +66,16 @@ public class MapperAnnotationBuilder {
         if (sqlSource != null) {
             final String mappedStatementId = type.getName() + "." + method.getName();
             SqlCommandType sqlCommandType = getSqlCommandType(method);
+
+            // step-14 新增
+            KeyGenerator keyGenerator;
+            String keyProperty = "id";
+            if (SqlCommandType.INSERT.equals(sqlCommandType) || SqlCommandType.UPDATE.equals(sqlCommandType)) {
+                keyGenerator = configuration.isUseGeneratedKeys() ? new Jdbc3KeyGenerator() : new NoKeyGenerator();
+            } else {
+                keyGenerator = new NoKeyGenerator();
+            }
+
             boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
 
             String resultMapId = null;
@@ -78,6 +91,8 @@ public class MapperAnnotationBuilder {
                     parameterTypeClass,
                     resultMapId,
                     getReturnType(method),
+                    keyGenerator,
+                    keyProperty,
                     languageDriver
             );
         }

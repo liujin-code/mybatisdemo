@@ -1,6 +1,7 @@
 package org.example.mybatis.Executor.statement;
 
 import org.example.mybatis.Executor.Executor;
+import org.example.mybatis.Executor.keygen.KeyGenerator;
 import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.session.ResultHandler;
@@ -39,6 +40,10 @@ public class PreparedStatementHandler extends BaseStatementHandler {
     public int update(Statement stmt) throws SQLException {
         PreparedStatement ps = (PreparedStatement) stmt;
         ps.execute();
-        return ps.getUpdateCount();
+        int rows = ps.getUpdateCount();
+        Object parameterObject = boundSql.getParameterObject();
+        KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
+        keyGenerator.processAfter(executor, mappedStatement, ps, parameterObject);
+        return rows;
     }
 }

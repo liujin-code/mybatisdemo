@@ -3,6 +3,7 @@ package org.example.mybatis.session;
 import lombok.Data;
 import org.example.mybatis.Executor.Executor;
 import org.example.mybatis.Executor.SimpleExecutor;
+import org.example.mybatis.Executor.keygen.KeyGenerator;
 import org.example.mybatis.Executor.parameter.ParameterHandler;
 import org.example.mybatis.Executor.resultset.DefaultResultSetHandler;
 import org.example.mybatis.Executor.resultset.ResultSetHandler;
@@ -40,6 +41,8 @@ public class Configuration {
     //环境
     protected Environment environment;
 
+    protected boolean useGeneratedKeys = false;
+
     // 映射注册机
     protected MapperRegistry mapperRegistry = new MapperRegistry(this);
 
@@ -60,6 +63,8 @@ public class Configuration {
     protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
 
     protected final Set<String> loadedResources = new HashSet<>();
+
+    protected final Map<String, KeyGenerator> keyGenerators = new HashMap<>();
 
     protected String databaseId;
 
@@ -177,5 +182,26 @@ public class Configuration {
 
     public void addResultMap(ResultMap resultMap) {
         resultMaps.put(resultMap.getId(), resultMap);
+    }
+
+    public void addKeyGenerator(String id, KeyGenerator keyGenerator) {
+        keyGenerators.put(id, keyGenerator);
+    }
+
+    public KeyGenerator getKeyGenerator(String id) {
+        return keyGenerators.get(id);
+    }
+
+    public boolean hasKeyGenerator(String id) {
+        return keyGenerators.containsKey(id);
+    }
+
+
+    public boolean isUseGeneratedKeys() {
+        return useGeneratedKeys;
+    }
+
+    public void setUseGeneratedKeys(boolean useGeneratedKeys) {
+        this.useGeneratedKeys = useGeneratedKeys;
     }
 }

@@ -12,4 +12,9 @@ public interface TypeHandler<T> {
     void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException;
 
     T getResult(ResultSet resultSet, String columnName) throws SQLException;
+
+    /**
+     * 取得结果
+     */
+    T getResult(ResultSet rs, int columnIndex) throws SQLException;
 }
