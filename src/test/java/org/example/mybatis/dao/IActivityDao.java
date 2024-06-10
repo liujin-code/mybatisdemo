@@ -5,7 +5,6 @@ import org.example.mybatis.PO.Activity;
 
 public interface IActivityDao {
 
-    Activity queryActivityById(Long activityId);
-
-    Integer insert(Activity activity);
+    Activity queryActivityById(Activity activity);
+//    Integer insert(Activity activity);
 }

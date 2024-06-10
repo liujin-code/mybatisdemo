@@ -1,5 +1,7 @@
 import com.alibaba.fastjson.JSON;
+import org.example.mybatis.PO.Activity;
 import org.example.mybatis.PO.User;
+import org.example.mybatis.dao.IActivityDao;
 import org.example.mybatis.dao.IUserDao;
 import org.example.mybatis.io.Resources;
 import org.example.mybatis.session.SqlSession;
@@ -106,4 +108,17 @@ public class ApiTest {
         logger.info("测试结果：{}", JSON.toJSONString(users));
     }
 
+    @Test
+    public void test_queryActivityById() throws IOException {
+        // 1. 从SqlSessionFactory中获取SqlSession
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader("mybatis-config-datasource.xml"));
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 2. 获取映射器对象
+        IActivityDao dao = sqlSession.getMapper(IActivityDao.class);
+        // 3. 测试验证
+        Activity req = new Activity();
+        req.setActivityId(100001L);
+        Activity res = dao.queryActivityById(req);
+        logger.info("测试结果：{}", JSON.toJSONString(res));
+    }
 }
