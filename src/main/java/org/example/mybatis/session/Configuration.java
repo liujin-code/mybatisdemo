@@ -17,6 +17,8 @@ import org.example.mybatis.mapping.BoundSql;
 import org.example.mybatis.mapping.Environment;
 import org.example.mybatis.mapping.MappedStatement;
 import org.example.mybatis.mapping.ResultMap;
+import org.example.mybatis.plugin.Interceptor;
+import org.example.mybatis.plugin.InterceptorChain;
 import org.example.mybatis.reflection.MetaObject;
 import org.example.mybatis.reflection.factory.DefaultObjectFactory;
 import org.example.mybatis.reflection.factory.ObjectFactory;
@@ -40,7 +42,6 @@ public class Configuration {
 
     //环境
     protected Environment environment;
-
     protected boolean useGeneratedKeys = false;
 
     // 映射注册机
@@ -50,6 +51,10 @@ public class Configuration {
     protected final Map<String, MappedStatement> mappedStatements = new HashMap<>();
     // 结果映射，存在Map里
     protected final Map<String, ResultMap> resultMaps = new HashMap<>();
+    protected final Map<String, KeyGenerator> keyGenerators = new HashMap<>();
+
+    // 插件拦截器链
+    protected final InterceptorChain interceptorChain = new InterceptorChain();
 
     // 类型别名注册机
     protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
@@ -63,8 +68,6 @@ public class Configuration {
     protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
 
     protected final Set<String> loadedResources = new HashSet<>();
-
-    protected final Map<String, KeyGenerator> keyGenerators = new HashMap<>();
 
     protected String databaseId;
 
@@ -203,5 +206,9 @@ public class Configuration {
 
     public void setUseGeneratedKeys(boolean useGeneratedKeys) {
         this.useGeneratedKeys = useGeneratedKeys;
+    }
+
+    public void addInterceptor(Interceptor interceptorInstance) {
+        interceptorChain.addInterceptor(interceptorInstance);
     }
 }
