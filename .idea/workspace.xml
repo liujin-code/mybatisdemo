@@ -5,33 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="添加resultMap映射">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/keygen/Jdbc3KeyGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/keygen/KeyGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/keygen/NoKeyGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/keygen/SelectKeyGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/DynamicSqlSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/ExpressionEvaluator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/IfSqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/OgnlCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/OgnlClassResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/TextSqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/TrimSqlNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/SimpleTypeRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/resultset/DefaultResultSetHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/BaseStatementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PreparedStatementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/statement/PreparedStatementHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/BaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/BaseBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/MapperBuilderAssistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/MapperBuilderAssistant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/annotation/MapperAnnotationBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/annotation/MapperAnnotationBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLMapperBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLMapperBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLStatementBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLStatementBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/reflection/MetaObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/transaction/jdbc/JdbcTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/transaction/jdbc/JdbcTransaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/BaseTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/BaseTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/DateTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/DateTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/LongTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/LongTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/StringTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/StringTypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/type/TypeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ActivityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mybatis/dao/IActivityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mybatis/dao/IActivityDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/mapper/Activity_Mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/mapper/Activity_Mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLScriptBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/scripting/xmltags/XMLScriptBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +223,7 @@
       <workItem from="1713882665910" duration="36758000" />
       <workItem from="1714539429806" duration="105182000" />
       <workItem from="1716113401150" duration="8676000" />
-      <workItem from="1716207370548" duration="68377000" />
+      <workItem from="1716207370548" duration="75798000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -361,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717219187296</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="添加resultMap映射">
+      <option name="closed" value="true" />
+      <created>1717923553241</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1717923553241</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
