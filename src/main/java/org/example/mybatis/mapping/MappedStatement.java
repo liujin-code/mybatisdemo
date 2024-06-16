@@ -1,13 +1,17 @@
 package org.example.mybatis.mapping;
 
+import org.example.mybatis.Executor.keygen.Jdbc3KeyGenerator;
 import org.example.mybatis.Executor.keygen.KeyGenerator;
+import org.example.mybatis.Executor.keygen.NoKeyGenerator;
 import org.example.mybatis.scripting.LanguageDriver;
 import org.example.mybatis.session.Configuration;
 
+import java.util.Collections;
 import java.util.List;
 
 
 public class MappedStatement {
+
     private String resource;
     private Configuration configuration;
     private String id;
@@ -16,28 +20,23 @@ public class MappedStatement {
     Class<?> resultType;
     private LanguageDriver lang;
     private List<ResultMap> resultMaps;
-
+    private boolean flushCacheRequired;
+    // step-14 新增
     private KeyGenerator keyGenerator;
-
     private String[] keyProperties;
-
     private String[] keyColumns;
+
     MappedStatement() {
         // constructor disabled
     }
 
-    public List<ResultMap> getResultMaps() {
-        return resultMaps;
-    }
-
-    public LanguageDriver getLang() {
-        return lang;
-    }
-
+    /**
+     * step-11 新增方法
+     */
     public BoundSql getBoundSql(Object parameterObject) {
+        // 调用 SqlSource#getBoundSql
         return sqlSource.getBoundSql(parameterObject);
     }
-
 
     /**
      * 建造者
@@ -52,13 +51,20 @@ public class MappedStatement {
             mappedStatement.sqlCommandType = sqlCommandType;
             mappedStatement.sqlSource = sqlSource;
             mappedStatement.resultType = resultType;
+            mappedStatement.keyGenerator = configuration.isUseGeneratedKeys() && SqlCommandType.INSERT.equals(sqlCommandType) ? new Jdbc3KeyGenerator() : new NoKeyGenerator();
             mappedStatement.lang = configuration.getDefaultScriptingLanguageInstance();
         }
 
         public MappedStatement build() {
             assert mappedStatement.configuration != null;
             assert mappedStatement.id != null;
+            mappedStatement.resultMaps = Collections.unmodifiableList(mappedStatement.resultMaps);
             return mappedStatement;
+        }
+
+        public Builder resource(String resource) {
+            mappedStatement.resource = resource;
+            return this;
         }
 
         public String id() {
@@ -67,11 +73,6 @@ public class MappedStatement {
 
         public Builder resultMaps(List<ResultMap> resultMaps) {
             mappedStatement.resultMaps = resultMaps;
-            return this;
-        }
-
-        public Builder resource(String resource) {
-            mappedStatement.resource = resource;
             return this;
         }
 
@@ -85,12 +86,13 @@ public class MappedStatement {
             return this;
         }
 
-        private String[] delimitedStringToArray(String in) {
-            if (in == null || in.trim().length() == 0) {
-                return null;
-            } else {
-                return in.split(",");
-            }
+    }
+
+    private static String[] delimitedStringToArray(String in) {
+        if (in == null || in.trim().length() == 0) {
+            return null;
+        } else {
+            return in.split(",");
         }
     }
 
@@ -114,27 +116,32 @@ public class MappedStatement {
         return resultType;
     }
 
-    public KeyGenerator getKeyGenerator() {
-        return keyGenerator;
+    public LanguageDriver getLang() {
+        return lang;
     }
 
-    public void setKeyGenerator(KeyGenerator keyGenerator) {
-        this.keyGenerator = keyGenerator;
-    }
-
-    public String[] getKeyProperties() {
-        return keyProperties;
-    }
-
-    public void setKeyProperties(String[] keyProperties) {
-        this.keyProperties = keyProperties;
+    public List<ResultMap> getResultMaps() {
+        return resultMaps;
     }
 
     public String[] getKeyColumns() {
         return keyColumns;
     }
 
-    public void setKeyColumns(String[] keyColumns) {
-        this.keyColumns = keyColumns;
+    public String[] getKeyProperties() {
+        return keyProperties;
     }
+
+    public KeyGenerator getKeyGenerator() {
+        return keyGenerator;
+    }
+
+    public String getResource() {
+        return resource;
+    }
+
+    public boolean isFlushCacheRequired() {
+        return flushCacheRequired;
+    }
+
 }

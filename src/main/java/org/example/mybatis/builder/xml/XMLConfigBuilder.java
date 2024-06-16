@@ -10,9 +10,11 @@ import org.example.mybatis.io.Resources;
 import org.example.mybatis.mapping.Environment;
 import org.example.mybatis.plugin.Interceptor;
 import org.example.mybatis.session.Configuration;
-import org.example.mybatis.transaction.jdbc.JdbcTransactionFactory;
+import org.example.mybatis.session.LocalCacheScope;
+import org.example.mybatis.transaction.TransactionFactory;
 import org.xml.sax.InputSource;
 
+import javax.sql.DataSource;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.List;
@@ -70,33 +72,64 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
 
     /**
-     * <environments default="development">
-     *         <environment id="development">
-     *             <transactionManager type="JDBC"/>
-     *             <dataSource type="DRUID">
-     *                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-     *                 <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true"/>
-     *                 <property name="username" value="root"/>
-     *                 <property name="password" value="Ab123456"/>
-     *             </dataSource>
-     *         </environment>
-     *     </environments>
+     * <settings>
+     *     <!--缓存级别：SESSION/STATEMENT-->
+     *     <setting name="localCacheScope" value="SESSION"/>
+     * </settings>
      */
-    private void environmentsElement(Element environments) throws InstantiationException, IllegalAccessException {
-        String environment = environments.attributeValue("default");
-        List<Element> environmentList = environments.elements("environment");
-        for (Element element : environmentList) {
-            String id = element.attributeValue("id");
-            if (id.equals(environment)) {
-                JdbcTransactionFactory jdbcTransactionFactory =(JdbcTransactionFactory) typeAliasRegistry.resolveAlias(element.element("transactionManager").attributeValue("type")).newInstance();
-                DataSourceFactory dataSourceFactory = (DataSourceFactory) typeAliasRegistry.resolveAlias(element.element("dataSource").attributeValue("type")).newInstance();
-                Properties properties = new Properties();
-                element.element("dataSource").elements("property").forEach(property -> {
-                    properties.setProperty(property.attributeValue("name"), property.attributeValue("value"));
-                });
-                dataSourceFactory.setProperties(properties);
-                Environment environment1 = Environment.builder().transactionFactory(jdbcTransactionFactory).dataSource(dataSourceFactory.getDataSource()).build();
-                configuration.setEnvironment(environment1);
+    private void settingsElement(Element context) {
+        if (context == null) return;
+        List<Element> elements = context.elements();
+        Properties props = new Properties();
+        for (Element element : elements) {
+            props.setProperty(element.attributeValue("name"), element.attributeValue("value"));
+        }
+        configuration.setLocalCacheScope(LocalCacheScope.valueOf(props.getProperty("localCacheScope")));
+    }
+
+
+    /**
+     * <environments default="development">
+     * <environment id="development">
+     * <transactionManager type="JDBC">
+     * <property name="..." value="..."/>
+     * </transactionManager>
+     * <dataSource type="POOLED">
+     * <property name="driver" value="${driver}"/>
+     * <property name="url" value="${url}"/>
+     * <property name="username" value="${username}"/>
+     * <property name="password" value="${password}"/>
+     * </dataSource>
+     * </environment>
+     * </environments>
+     */
+    private void environmentsElement(Element context) throws Exception {
+        String environment = context.attributeValue("default");
+
+        List<Element> environmentList = context.elements("environment");
+        for (Element e : environmentList) {
+            String id = e.attributeValue("id");
+            if (environment.equals(id)) {
+                // 事务管理器
+                TransactionFactory txFactory = (TransactionFactory) typeAliasRegistry.resolveAlias(e.element("transactionManager").attributeValue("type")).newInstance();
+
+                // 数据源
+                Element dataSourceElement = e.element("dataSource");
+                DataSourceFactory dataSourceFactory = (DataSourceFactory) typeAliasRegistry.resolveAlias(dataSourceElement.attributeValue("type")).newInstance();
+                List<Element> propertyList = dataSourceElement.elements("property");
+                Properties props = new Properties();
+                for (Element property : propertyList) {
+                    props.setProperty(property.attributeValue("name"), property.attributeValue("value"));
+                }
+                dataSourceFactory.setProperties(props);
+                DataSource dataSource = dataSourceFactory.getDataSource();
+
+                // 构建环境
+                Environment.Builder environmentBuilder = new Environment.Builder(id)
+                        .transactionFactory(txFactory)
+                        .dataSource(dataSource);
+
+                configuration.setEnvironment(environmentBuilder.build());
             }
         }
     }

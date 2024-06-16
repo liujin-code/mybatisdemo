@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="动态参数解析">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/Interceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/InterceptorChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/Intercepts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/Invocation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/Plugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/plugin/Signature.java" afterDir="false" />
+    <list default="true" id="003a43fe-1116-4301-b067-4df2fbdb33a1" name="Changes" comment="Plugin插件功能实现">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/ExecutionPlaceholder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/cache/Cache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/cache/CacheKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/cache/NullCacheKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/cache/impl/PerpetualCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/LocalCacheScope.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/BaseExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/Executor/Executor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/mapping/MappedStatement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mybatis/session/defaults/DefaultSqlSession.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -221,7 +226,7 @@
       <workItem from="1713882665910" duration="36758000" />
       <workItem from="1714539429806" duration="105182000" />
       <workItem from="1716113401150" duration="8676000" />
-      <workItem from="1716207370548" duration="82850000" />
+      <workItem from="1716207370548" duration="87473000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -367,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718024886273</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Plugin插件功能实现">
+      <option name="closed" value="true" />
+      <created>1718030422599</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1718030422599</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +414,8 @@
     <MESSAGE value="添加注解" />
     <MESSAGE value="添加resultMap映射" />
     <MESSAGE value="动态参数解析" />
-    <option name="LAST_COMMIT_MESSAGE" value="动态参数解析" />
+    <MESSAGE value="Plugin插件功能实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="Plugin插件功能实现" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -434,7 +448,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/mybatis/builder/xml/XMLConfigBuilder.java</url>
-          <line>37</line>
+          <line>40</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
       </breakpoints>

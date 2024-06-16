@@ -20,4 +20,34 @@ public class Environment {
         this.transactionFactory = transactionFactory;
         this.dataSource = dataSource;
     }
+
+    public static class Builder {
+
+        private final String id;
+        private TransactionFactory transactionFactory;
+        private DataSource dataSource;
+
+        public Builder(String id) {
+            this.id = id;
+        }
+
+        public Builder transactionFactory(TransactionFactory transactionFactory) {
+            this.transactionFactory = transactionFactory;
+            return this;
+        }
+
+        public Builder dataSource(DataSource dataSource) {
+            this.dataSource = dataSource;
+            return this;
+        }
+
+        public String id() {
+            return this.id;
+        }
+
+        public Environment build() {
+            return new Environment(this.id, this.transactionFactory, this.dataSource);
+        }
+
+    }
 }

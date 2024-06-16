@@ -42,7 +42,7 @@ public class DefaultSqlSession implements SqlSession {
         logger.info("执行查询 statement：{} parameter：{}", statement, JSON.toJSONString(parameter));
         MappedStatement ms = configuration.getMappedStatement(statement);
         try {
-            return executor.query(ms, parameter, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER, ms.getSqlSource().getBoundSql(parameter));
+            return executor.query(ms, parameter, RowBounds.DEFAULT, Executor.NO_RESULT_HANDLER);
         } catch (SQLException e) {
             throw new RuntimeException("Error querying database.  Cause: " + e);
         }
